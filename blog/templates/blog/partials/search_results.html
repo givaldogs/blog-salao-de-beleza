@@ -1,0 +1,15 @@
+<!-- templates/search_results.html -->
+ <!--copiado do chatgpt exemplo-->
+<h1>Resultados da pesquisa</h1>
+
+<p>Você pesquisou por: {{ search_query }}</p>
+
+{% if results %}
+  <ul>
+    {% for result in results %}
+      <li>{{ result.title }}</li>  <!-- Exiba os resultados aqui -->
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Nenhum resultado encontrado.</p>
+{% endif %}
