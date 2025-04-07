@@ -4,7 +4,7 @@
 *.pyc
 __pycache__
 db.sqlite3
-static/
+#static/ # tem que ir para o repositorio
 media/
 blog/local_settings.py 
 
