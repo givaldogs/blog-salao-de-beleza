@@ -107,6 +107,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+posts/
 anotacao.txt 
 
 # mkdocs documentation
