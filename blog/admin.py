@@ -1,7 +1,18 @@
 from django.contrib import admin
-from blog.models import Category, Page, Tag, Post 
+from django_summernote.admin import SummernoteModelAdmin
+from django_summernote.models import AbstractAttachment
+from blog.models import Category, Page, Tag, Post, PostAttachment
 
 # Register your models here.
+
+# Garante que não dê erro se já estiver registrado
+if admin.site.is_registered(PostAttachment):
+    admin.site.unregister(PostAttachment)
+
+@admin.register(PostAttachment)
+class PostAttachmentAdmin(admin.ModelAdmin):
+    pass  # ou customize com list_display etc.
+
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
@@ -28,7 +39,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Page)
-class PageAdmin(admin.ModelAdmin):
+class PageAdmin(SummernoteModelAdmin):
+     summernote_fields = ('content',)
      list_display = 'id', 'title', 'is_published',
      list_display_links = 'title',
      search_fields = 'id', 'slug', 'title', 'content',
@@ -42,7 +54,8 @@ class PageAdmin(admin.ModelAdmin):
 
 
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SummernoteModelAdmin):
+     summernote_fields = ('content',)
      list_display = 'id', 'title', 'is_published',  'created_by',
      list_display_links = 'title',
      search_fields = 'id', 'slug', 'title', 'excerpt', 'content',
