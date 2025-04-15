@@ -2,6 +2,7 @@ from django.db import models
 from utils.rands import slugify_new
 from utils.images import resize_image
 from django_summernote.models import AbstractAttachment
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -22,7 +23,14 @@ class PostAttachment(AbstractAttachment):
              resize_image(self.file, 900, True, 70)
  
          return super_save
- 
+
+
+class PostManager(models.Manager):
+     def get_published(self):
+         return self\
+             .filter(is_published=True)\
+             .order_by('-pk')
+     
  
 class Tag(models.Model):
      class Meta:
@@ -94,6 +102,7 @@ class Post(models.Model):
          verbose_name = 'Post'
          verbose_name_plural = 'Posts'
  
+     objects = PostManager()
      title = models.CharField(max_length=65,)
      slug = models.SlugField(
          unique=True, default="",
@@ -139,7 +148,13 @@ class Post(models.Model):
  
      def __str__(self):
          return self.title
- 
+     
+     def get_absolute_url(self):
+         if not self.is_published:
+             return reverse('blog:index')
+         return reverse('blog:post', args=(self.slug,))
+     
+     
      def save(self, *args, **kwargs):
          if not self.slug:
              self.slug = slugify_new(self.title, 4)
