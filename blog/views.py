@@ -93,7 +93,7 @@ def search(request,):
              'search_value': search_value,
          }
      )
- 
+
 
 def page(request, slug):
     page = (
@@ -102,6 +102,12 @@ def page(request, slug):
         .filter(slug=slug)
         .first()
     )
+    print('vendo se a pagina existe')
+    # Verifica se a página foi encontrada
+    if page:
+        print(f"Página encontrada: {page.title}")
+    else:
+        print(f"Página não encontrada para o slug: {slug}")
 
     return render(
         request,
@@ -143,14 +149,3 @@ def post_list(request):
             'page_obj': page_obj,
         }
     )
-
-# Página estática
-def page(request, slug):
-    # Se quiser, podemos adaptar isso pra buscar uma Page específica também.
-    return render(
-        request,
-        'blog/pages/page.html',
-        {}
-    )
-
-# ========================

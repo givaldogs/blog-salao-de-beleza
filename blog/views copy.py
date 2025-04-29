@@ -1,28 +1,162 @@
-from django.urls import path
-from blog.views import index, post, page, search_view  # Importe a função search_view aqui
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from blog.models import Page, Post
+from django.db.models import Q
+
+PER_PAGE = 9
 
 
-app_name = 'blog'
+def index(request):
+    posts = Post.objects.get_published()
+
+    paginator = Paginator(posts, PER_PAGE)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(
+        request,
+        'blog/pages/index.html',
+        {
+            'page_obj': page_obj,
+        }
+    )
 
 
+def created_by(request, author_pk):
+     posts = Post.objects.get_published()\
+         .filter(created_by__pk=author_pk)
+ 
+     paginator = Paginator(posts, PER_PAGE)
+     page_number = request.GET.get("page")
+     page_obj = paginator.get_page(page_number)
+ 
+     return render(
+         request,
+         'blog/pages/index.html',
+         {
+             'page_obj': page_obj,
+         }
+     )
 
-urlpatterns = [
-     path('', index, name='index'),
-     path('post/<slug:slug>/', post, name='post'),
-     path('page/', page, name='page'),
-     path('page/<slug:slug>/', page, name='page'),
-    # path('created_by/<int:author_pk>/', created_by, name='created_by'),
-     #path('category/<slug:slug>/', category, name='category'),
 
-]
+def category(request, slug):
+     posts = Post.objects.get_published()\
+         .filter(category__slug=slug)
+ 
+     paginator = Paginator(posts, PER_PAGE)
+     page_number = request.GET.get("page")
+     page_obj = paginator.get_page(page_number)
+ 
+     return render(
+         request,
+         'blog/pages/index.html',
+         {
+             'page_obj': page_obj,
+         }
+     )
 
-'''
-# meu
-urlpatterns = [
-    path('', index, name='index'),
-    path('post/', post, name='post'),
-    path('page/', page, name='page'),
-    path('created_by/<int:pk>/', views.created_by, name='created_by'),
-    path('search/', search_view, name='search'),  # Adicione a URL de busca
+
+def tag(request, slug):
+     posts = Post.objects.get_published()\
+         .filter(tags__slug=slug)
+ 
+     paginator = Paginator(posts, PER_PAGE)
+     page_number = request.GET.get("page")
+     page_obj = paginator.get_page(page_number)
+ 
+     return render(
+         request,
+         'blog/pages/index.html',
+         {
+             'page_obj': page_obj,
+         }
+     )
+
+
+def search(request,):
+     search_value = request.GET.get('search', '').strip()
+ 
+     posts = (
+         Post.objects.get_published()
+         .filter(
+             Q(title__icontains=search_value) |
+             Q(excerpt__icontains=search_value) |
+             Q(content__icontains=search_value)
+         )[:PER_PAGE]
+     )
+ 
+     return render(
+         request,
+         'blog/pages/index.html',
+         {
+             'page_obj': posts,
+             'search_value': search_value,
+         }
+     )
+
+
+def page(request, slug):
+    page = (
+        Page.objects
+        .filter(is_published=True)
+        .filter(slug=slug)
+        .first()
+    )
+    print('vendo se a pagina existe')
+    # Verifica se a página foi encontrada
+    if page:
+        print(f"Página encontrada: {page.title}")
+    else:
+        print(f"Página não encontrada para o slug: {slug}")
+
+    return render(
+        request,
+        'blog/pages/page.html',
+        {
+            'page': page,
+        }
+    )
+
+ 
+# Detalhe do post
+def post(request, slug):
     
-'''
+    post = (
+        Post.objects.get_published()
+        .filter(slug=slug)
+        .first()
+    )
+    return render(
+        request,
+        'blog/pages/post.html',
+        {
+             'post': post,
+        }
+    )
+
+# ======= sugestão do ChatGpt  :
+# Lista de posts
+def post_list(request):
+    posts = Post.objects.filter(is_published=True).order_by('-pk')
+    paginator = Paginator(posts, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(
+        request,
+        'blog/pages/post_list.html',
+        {
+            'page_obj': page_obj,
+        }
+    )
+
+# Página estática
+def page(request, slug):
+    # Se quiser, podemos adaptar isso pra buscar uma Page específica também.
+    return render(
+        request,
+        'blog/pages/page.html',
+        {}
+    )
+
+# ========================
