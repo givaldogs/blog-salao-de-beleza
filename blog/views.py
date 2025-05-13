@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 #from django.http import Http404
 from django.views.generic import ListView
 from django.db.models.query import QuerySet
-from django.http import Http404, HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
+from django.http import Http404
+from django.shortcuts import render
 
 PER_PAGE = 2
 
@@ -100,28 +100,43 @@ class CreatedByListView(PostListView):
         return super().get(request, *args, **kwargs)
 
 
-def category(request, slug):
-    posts = Post.objects.get_published()\
-        .filter(category__slug=slug)
-    
-    paginator = Paginator(posts, PER_PAGE)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+class CategoryListView(PostListView):
+    allow_empty = False
 
-    if len(page_obj) == 0:
-       raise Http404()
- 
-    page_title = f'{page_obj[0].category.name} - Categoria - '
- 
-    return render(
-        request,
-        'blog/pages/index.html',
-        {
-            'page_obj': page_obj,
+    def get_queryset(self) -> QuerySet[Any]:
+        return super().get_queryset().filter(
+            category__slug=self.kwargs.get('slug')
+        )
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        page_title = (
+            f'{self.object_list[0].category.name}'  # type: ignore
+            ' - Categoria - '
+        )
+        ctx.update({
             'page_title': page_title,
-        }
-    )
+        })
+        return ctx
 
+class TagListView(PostListView):
+    allow_empty = False
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return super().get_queryset().filter(
+            tags__slug=self.kwargs.get('slug')
+        )
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        page_title = (
+            f'{self.object_list[0].tags.first().name}'  # type: ignore
+            ' - Tag - '
+        )
+        ctx.update({
+            'page_title': page_title,
+        })
+        return ctx
 
 def tag(request, slug):
     posts = Post.objects.get_published()\
