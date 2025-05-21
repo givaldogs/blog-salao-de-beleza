@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-
-import os
 import logging
 
 logger = logging.getLogger(__name__)
@@ -29,6 +27,20 @@ logger.debug(f"POSTGRES_HOST: {os.getenv('POSTGRES_HOST')}")
 logger.debug(f"POSTGRES_PORT: {os.getenv('POSTGRES_PORT')}")
 logger.debug(f"DB_ENGINE: {os.getenv('DB_ENGINE')}")
 
+print('===================================================')
+print(f"SECRET_KEY: {os.getenv('SECRET_KEY')}")
+print(f"DEBUG: {os.getenv('DEBUG')}")
+print(f"ALLOWED_HOSTS: {os.getenv('ALLOWED_HOSTS')}")
+print(f"POSTGRES_DB: {os.getenv('POSTGRES_DB')}")
+print(f"POSTGRES_USER: {os.getenv('POSTGRES_USER')}")
+print(f"POSTGRES_PASSWORD: {os.getenv('POSTGRES_PASSWORD')}")
+print(f"POSTGRES_HOST: {os.getenv('POSTGRES_HOST')}")
+print(f"POSTGRES_PORT: {os.getenv('POSTGRES_PORT')}")
+print(f"DB_ENGINE: {os.getenv('DB_ENGINE')}")
+print('===================F I M==============================')
+
+x=0
+y = 2 / 0
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
