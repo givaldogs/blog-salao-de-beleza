@@ -39,8 +39,10 @@ print(f"POSTGRES_PORT: {os.getenv('POSTGRES_PORT')}")
 print(f"DB_ENGINE: {os.getenv('DB_ENGINE')}")
 print('===================F I M==============================')
 
+'''
 x=0
 y = 2 / 0
+'''
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
