@@ -18,10 +18,14 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-logger.debug(f"POSTGRES_HOST: {os.getenv('POSTGRES_HOST')}")
+# Exemplo de logging para verificar as variáveis de ambiente
+logger.debug(f"SECRET_KEY: {os.getenv('SECRET_KEY')}")
+logger.debug(f"DEBUG: {os.getenv('DEBUG')}")
+logger.debug(f"ALLOWED_HOSTS: {os.getenv('ALLOWED_HOSTS')}")
 logger.debug(f"POSTGRES_DB: {os.getenv('POSTGRES_DB')}")
 logger.debug(f"POSTGRES_USER: {os.getenv('POSTGRES_USER')}")
 logger.debug(f"POSTGRES_PASSWORD: {os.getenv('POSTGRES_PASSWORD')}")
+logger.debug(f"POSTGRES_HOST: {os.getenv('POSTGRES_HOST')}")
 logger.debug(f"POSTGRES_PORT: {os.getenv('POSTGRES_PORT')}")
 logger.debug(f"DB_ENGINE: {os.getenv('DB_ENGINE')}")
 
@@ -222,3 +226,32 @@ AXES_ENABLED = True
 AXES_FAILURE_LIMIT = 3
 AXES_COOLOFF_TIME = 1  # 1 Hora
 AXES_RESET_ON_SUCCESS = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
