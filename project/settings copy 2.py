@@ -13,17 +13,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-import os
-import logging
-
-logger = logging.getLogger(__name__)
-
-logger.debug(f"POSTGRES_HOST: {os.getenv('POSTGRES_HOST')}")
-logger.debug(f"POSTGRES_DB: {os.getenv('POSTGRES_DB')}")
-logger.debug(f"POSTGRES_USER: {os.getenv('POSTGRES_USER')}")
-logger.debug(f"POSTGRES_PASSWORD: {os.getenv('POSTGRES_PASSWORD')}")
-logger.debug(f"POSTGRES_PORT: {os.getenv('POSTGRES_PORT')}")
-logger.debug(f"DB_ENGINE: {os.getenv('DB_ENGINE')}")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
