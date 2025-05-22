@@ -1,0 +1,28 @@
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA
+https://github.com/givaldogs/PJI310_BLOG_SALAO_BELEZA.git
+
+https://github.com/givaldogs/Univesp-PJI310-SALA-002-GRUPO-022.git
+
+comandos do docker
+=====================
+para recriar o conteiner, toda vez
+que voce alterar o .env ou docker-compose.yml ou Dockerfile
+docker-compose up --build-- --force-recreate--
+
+========================
+ver o conteiner que ja tem
+docker ps -a 
+==============================
+apagar conteiner
+docker rm xxxx xxxx
+---------------------------
+apagar imagem
+docker rmi xxxx 
+-----------------------------
+para executar o blog dentro do container
+docker-compose run --rm djangoapp python -v
+-----------------
+para ver as variaveis de ambiente:
+docker-compose run --rm djangoapp /bin/sh -c'echo $SECRET_KEY'
+========================
+
