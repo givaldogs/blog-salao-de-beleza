@@ -47,6 +47,10 @@ class Tag(models.Model):
          if not self.slug:
              self.slug = slugify_new(self.name, 4)
          return super().save(*args, **kwargs)
+     
+     def __str__(self) -> str:
+         return self.name
+ 
  
  
 class Category(models.Model):
