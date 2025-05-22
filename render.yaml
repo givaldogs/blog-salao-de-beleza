@@ -6,9 +6,9 @@ services:
     buildCommand: |
       pip install -r Univesp-PJI310-SALA-002-GRUPO-022/requirements.txt
       cd Univesp-PJI310-SALA-002-GRUPO-022
-      python3 manage.py migrate
-      python3 manage.py collectstatic --noinput
-      python3 manage.py shell < create_superuser_if_needed.py
+      python manage.py migrate
+      python manage.py collectstatic --noinput
+      python manage.py shell < create_superuser_if_needed.py
     startCommand: |
       cd Univesp-PJI310-SALA-002-GRUPO-022
       gunicorn project.wsgi:application
