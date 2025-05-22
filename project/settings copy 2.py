@@ -16,11 +16,6 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# arquivos estaticos vao estar na pasta a partir da raiz /data/web/static:
-# arquivos media vao estar na pasta a partir da raiz /data/web/media:
-# /data/web/static
-DATA_DIR = BASE_DIR.parent / 'data' / 'web'
-
 # DOTENV
 load_dotenv(BASE_DIR.parent / 'dotenv_files' / '.env', override=True)
 
@@ -28,27 +23,18 @@ load_dotenv(BASE_DIR.parent / 'dotenv_files' / '.env', override=True)
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-33m7*=a=2yo_lv4)x_=k#s63-u-$z73kc@=@!@jo-e*%r8228@'
-SECRET_KEY = os.getenv('SECRET_KEY', 'change-me')
-
-# ========== Segurança ==========
-SECRET_KEY = os.getenv('SECRET_KEY')
-if not SECRET_KEY:
-    raise ValueError("A variável SECRET_KEY está ausente no .env")
-
+SECRET_KEY = 'django-insecure-33m7*=a=2yo_lv4)x_=k#s63-u-$z73kc@=@!@jo-e*%r8228@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.getenv('DEBUG', 'False') == 'True' # na producao tem que ser assim
 # DEBUG = True
+# DEBUG deve ser 'True' ou 'False' no .env
 DEBUG = os.getenv('DEBUG', 'False').strip().lower() == 'true'
 
-# ALLOWED_HOSTS = ['pji310-blog.onrender.com', 'localhost', '127.0.0.1']
-# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
-ALLOWED_HOSTS = [
-    h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',')
-    if h.strip()
-]
+# ALLOWED_HOSTS = ['pji310-blog.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+
 
 # Application definition
 
@@ -114,27 +100,13 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# ========== Banco de Dados ==========
-
-required_db_vars = [
-    'DB_ENGINE', 'POSTGRES_DB', 'POSTGRES_USER',
-    'POSTGRES_PASSWORD', 'POSTGRES_HOST', 'POSTGRES_PORT'
-]
-for var in required_db_vars:
-    if not os.getenv(var):
-        raise ValueError(f"A variável {var} está ausente no .env")
-
-
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'change-me'),
-        'NAME': os.getenv('POSTGRES_DB', 'change-me'),
-        'USER': os.getenv('POSTGRES_USER', 'change-me'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'change-me'),
-        'HOST': os.getenv('POSTGRES_HOST', 'change-me'),
-        'PORT': os.getenv('POSTGRES_PORT', 'change-me'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -173,12 +145,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # /data/web/static
-STATIC_ROOT =  DATA_DIR  / 'static'
+STATIC_ROOT =  BASE_DIR  / 'static'
 
 MEDIA_URL = '/media/'
 
 # /data/web/media
-MEDIA_ROOT = DATA_DIR  / 'media'
+MEDIA_ROOT = BASE_DIR  / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

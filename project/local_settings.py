@@ -3,12 +3,14 @@
 
 # # Comando:
 # # python -c "import string as s;from secrets import SystemRandom as SR;print(''.join(SR().choices(s.ascii_letters + s.digits + s.punctuation, k=64)));"
-# SECRET_KEY = 'HcGtB>DbLG`H!i/U-_^1v*fq8*fo["TK/F8,"`C6u{"8*U3fbaG7>m^T~^xr&v'
+# SECRET_KEY = "HcGtB>DbLGH!i/U-_^1v*fq8*fo[TK/F8,C6u{8*U3fbaG7>m^T~^xr&v"
 
 # # DEBUG DEVE SER False em produção
+# 0 False, 1 True
 # DEBUG = False
 
 # # Seu domínio ou IP devem vir aqui
+# localhost', '127.0.0.1'
 # ALLOWED_HOSTS = [
 #     'SEU_DOMINIO_OU_IP',
 # ]  # Troque * para seu domínio ou IP
