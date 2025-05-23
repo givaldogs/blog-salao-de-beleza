@@ -1,4 +1,20 @@
 C:\Users\gival\PJI310_BLOG_SALAO_BELEZA
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\dotenv_files\.venv
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\requirements.txt
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\djangoapp\requirements.txt
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\djangoapp\manage.py
+professor
+PJI310_BLOG_SALAO_BELEZA/
+├── djangoapp/
+|----project/
+|------- __init__.py
+|-------- asgi.py , settings.py, urls.py, wsgi.py
+│   ├── manage.py
+│   ├── requirements.txt
+
+o meu fica na raiz projeto, ou seja nao esta dentro da pasta djangoapp
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\project
+
 https://github.com/givaldogs/PJI310_BLOG_SALAO_BELEZA.git
 
 https://github.com/givaldogs/Univesp-PJI310-SALA-002-GRUPO-022.git
@@ -7,7 +23,16 @@ comandos do docker
 =====================
 para recriar o conteiner, toda vez
 que voce alterar o .env ou docker-compose.yml ou Dockerfile
-docker-compose up --build-- --force-recreate--
+docker-compose up --build --force-recreate
+
+===============
+Os logs ficam “escondidos”, mas você pode vê-los depois com:
+docker-compose logs
+======================
+Para parar os containers em background, você usa:
+docker-compose down
+==================================
+
 
 ========================
 ver o conteiner que ja tem

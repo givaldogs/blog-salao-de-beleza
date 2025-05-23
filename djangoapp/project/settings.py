@@ -22,7 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR.parent / 'data' / 'web'
 
 # DOTENV
-load_dotenv(BASE_DIR.parent / 'dotenv_files' / '.env', override=True)
+#load_dotenv(BASE_DIR.parent / 'dotenv_files' / '.env', override=True)
+load_dotenv(BASE_DIR / 'dotenv_files' / '.env', override=True)
+
+# Teste para garantir que as variáveis estão sendo carregadas
+print("SECRET_KEY:", os.getenv('SECRET_KEY'))
+print("DB_ENGINE:", os.getenv('DB_ENGINE'))
+print("POSTGRES_DB:", os.getenv('POSTGRES_DB'))
+print("POSTGRES_USER:", os.getenv('POSTGRES_USER'))
+print("POSTGRES_PASSWORD:", os.getenv('POSTGRES_PASSWORD'))
+print("POSTGRES_HOST:", os.getenv('POSTGRES_HOST'))
+print("POSTGRES_PORT:", os.getenv('POSTGRES_PORT'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
