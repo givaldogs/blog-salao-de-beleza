@@ -25,21 +25,21 @@ DATA_DIR = BASE_DIR.parent / 'data' / 'web'
 #load_dotenv(BASE_DIR.parent / 'dotenv_files' / '.env', override=True)
 load_dotenv(BASE_DIR / 'dotenv_files' / '.env', override=True)
 
-# Teste para garantir que as variáveis estão sendo carregadas
-print("SECRET_KEY:", os.getenv('SECRET_KEY'))
-print("DB_ENGINE:", os.getenv('DB_ENGINE'))
-print("POSTGRES_DB:", os.getenv('POSTGRES_DB'))
-print("POSTGRES_USER:", os.getenv('POSTGRES_USER'))
-print("POSTGRES_PASSWORD:", os.getenv('POSTGRES_PASSWORD'))
-print("POSTGRES_HOST:", os.getenv('POSTGRES_HOST'))
-print("POSTGRES_PORT:", os.getenv('POSTGRES_PORT'))
+# # Teste para garantir que as variáveis estão sendo carregadas
+# print("SECRET_KEY:", os.getenv('SECRET_KEY'))
+# print("DB_ENGINE:", os.getenv('DB_ENGINE'))
+# print("POSTGRES_DB:", os.getenv('POSTGRES_DB'))
+# print("POSTGRES_USER:", os.getenv('POSTGRES_USER'))
+# print("POSTGRES_PASSWORD:", os.getenv('POSTGRES_PASSWORD'))
+# print("POSTGRES_HOST:", os.getenv('POSTGRES_HOST'))
+# print("POSTGRES_PORT:", os.getenv('POSTGRES_PORT'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'django-insecure-33m7*=a=2yo_lv4)x_=k#s63-u-$z73kc@=@!@jo-e*%r8228@'
-SECRET_KEY = os.getenv('SECRET_KEY', 'change-me')
+# SECRET_KEY = os.getenv('SECRET_KEY', 'change-me')
 
 # ========== Segurança ==========
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -189,6 +189,13 @@ MEDIA_URL = '/media/'
 
 # /data/web/media
 MEDIA_ROOT = DATA_DIR  / 'media'
+
+print(f'STATIC_URL {STATIC_URL}')
+print(f'STATIC_ROOT {STATIC_ROOT}')
+print(f'MEDIA_URL  {MEDIA_URL }')
+print(f'MEDIA_ROOT {MEDIA_ROOT}')
+print(f'DATA_DIR {DATA_DIR}')
+print(f'BASE_DIR {BASE_DIR}')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

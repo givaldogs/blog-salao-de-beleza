@@ -55,6 +55,7 @@ Criando as pastas do projeto e repositório
 
 ```
 mkdir ~/agendarepo ~/agendaapp
+mkdir ~/blogrepo ~/blogapp
 ```
 
 Configurando os repositórios
@@ -66,6 +67,7 @@ cd ..
 cd ~/agendaapp
 git init
 git remote add agendarepo ~/agendarepo
+git remote add blogrepo ~/blogrepo
 git add .
 git commit -m 'Initial'
 git push agendarepo main -u # erro

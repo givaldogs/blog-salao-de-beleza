@@ -3,21 +3,30 @@ C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\dotenv_files\.venv
 C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\requirements.txt
 C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\djangoapp\requirements.txt
 C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\djangoapp\manage.py
-professor
-PJI310_BLOG_SALAO_BELEZA/
-├── djangoapp/
-|----project/
-|------- __init__.py
-|-------- asgi.py , settings.py, urls.py, wsgi.py
-│   ├── manage.py
-│   ├── requirements.txt
-
-o meu fica na raiz projeto, ou seja nao esta dentro da pasta djangoapp
-C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\project
-
 https://github.com/givaldogs/PJI310_BLOG_SALAO_BELEZA.git
 
+c:\Users\gival\PJI310_BLOG_SALAO_BELEZA\djangoapp\project\setting.py
+
 https://github.com/givaldogs/Univesp-PJI310-SALA-002-GRUPO-022.git
+
+cp -r /caminho/onde/estao/seus/arquivos/blog/static/blog/css /home/givaldowanda/blogapp/data/web/static/blog/css
+
+pasta raiz do projeto =
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA
+pasta app blog =
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\DJANGOAPP\BLOG
+pasta STATIC =
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\DJANGOAPP\BLOG\STATIC\BLOG\CSS\style.css
+PASTA APP site_setup =
+C:\Users\gival\PJI310_BLOG_SALAO_BELEZA\DJANGOAPP\site_setup\
+
+/home/givaldowanda/blogapp/static/blog/css/style.css
+Isso significa que seus arquivos estáticos estão nessa pasta /home/givaldowanda/blogapp/static, e não em /home/givaldowanda/blogapp/data/web/static, que é onde seu Nginx está servindo os arquivos.
+
+sudo nano /etc/nginx/sites-available/blog
+sudo ln -s /etc/nginx/sites-available/blogip /etc/nginx/sites-enabled/blogip
+
+esta http://35.239.220.50/static/blog/css/style.css
 
 comandos do docker
 =====================
