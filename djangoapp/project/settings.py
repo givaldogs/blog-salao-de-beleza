@@ -190,12 +190,12 @@ MEDIA_URL = '/media/'
 # /data/web/media
 MEDIA_ROOT = DATA_DIR  / 'media'
 
-print(f'STATIC_URL {STATIC_URL}')
-print(f'STATIC_ROOT {STATIC_ROOT}')
-print(f'MEDIA_URL  {MEDIA_URL }')
-print(f'MEDIA_ROOT {MEDIA_ROOT}')
-print(f'DATA_DIR {DATA_DIR}')
-print(f'BASE_DIR {BASE_DIR}')
+# print(f'STATIC_URL {STATIC_URL}')
+# print(f'STATIC_ROOT {STATIC_ROOT}')
+# print(f'MEDIA_URL  {MEDIA_URL }')
+# print(f'MEDIA_ROOT {MEDIA_ROOT}')
+# print(f'DATA_DIR {DATA_DIR}')
+# print(f'BASE_DIR {BASE_DIR}')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
