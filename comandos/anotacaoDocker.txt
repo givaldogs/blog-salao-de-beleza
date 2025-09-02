@@ -60,3 +60,5 @@ para ver as variaveis de ambiente:
 docker-compose run --rm djangoapp /bin/sh -c'echo $SECRET_KEY'
 ========================
 
+Rodar o servidor com docker exec -it djangoapp python manage.py runserver 0.0.0.0:8000
+=======================================================

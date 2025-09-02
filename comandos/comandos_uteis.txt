@@ -1,0 +1,23 @@
+# Git
+
+git log -- project/settings.py
+git show <commit_hash>
+git diff HEAD -- project/settings.py
+
+# Systemd
+
+systemctl | grep gunicorn
+systemctl | grep blog
+sudo systemctl restart <nome-do-serviço>
+sudo systemctl status <nome-do-serviço>
+
+# Processos manuais
+
+ps aux | grep gunicorn
+pkill gunicorn
+gunicorn project.wsgi:application --bind 0.0.0.0:8000 --daemon
+
+# Depuração
+
+grep -i posts project/settings.py
+cat project/settings.py

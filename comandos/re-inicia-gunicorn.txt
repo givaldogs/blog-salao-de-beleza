@@ -1,0 +1,50 @@
+# --- Git ---
+
+# Ver histórico de commits que alteraram settings.py
+git log -- project/settings.py
+
+# Mostrar as mudanças feitas em um commit específico
+git show <commit_hash>
+
+# Mostrar diferenças entre arquivo atual e último commit
+git diff HEAD -- project/settings.py
+
+
+# --- Systemd (gerenciamento de serviços) ---
+
+# Listar serviços ativos relacionados ao Gunicorn
+systemctl | grep gunicorn
+
+# Listar serviços ativos relacionados ao blog (ou nome do seu serviço)
+systemctl | grep blog
+
+# Reiniciar o serviço do Gunicorn (substitua pelo nome correto)
+sudo systemctl restart <nome-do-serviço>
+sudo systemctl restart blog.service
+
+
+# Verificar status do serviço
+sudo systemctl status <nome-do-serviço>
+sudo systemctl status blog.service
+
+
+
+# --- Processos manuais ---
+
+# Mostrar processos relacionados ao Gunicorn em execução
+ps aux | grep gunicorn
+
+# Encerrar todos os processos do Gunicorn
+pkill gunicorn
+
+# Iniciar Gunicorn manualmente (substitua 'project' pelo nome correto)
+gunicorn project.wsgi:application --bind 0.0.0.0:8000 --daemon
+
+
+# --- Depuração e verificação de arquivos ---
+
+# Procurar por "posts" no settings.py (ignora maiúsculas/minúsculas)
+grep -i posts project/settings.py
+
+# Mostrar o conteúdo do settings.py no terminal
+cat project/settings.py

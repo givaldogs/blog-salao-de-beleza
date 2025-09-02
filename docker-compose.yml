@@ -13,6 +13,8 @@ services:
       - ./data/web/media:/data/web/media/
     env_file:
       - ./dotenv_files/.env
+    environment:
+      - DOCKER_ENV=true
     depends_on:
       - psql
   psql:

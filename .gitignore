@@ -1,40 +1,57 @@
-/djangoapp/static/
-/djangoapp/media/
-/djangoapp/project/local_settings.py
-gunicorn-error-log
-__localcode
-/data/
+# Ignore pastas geradas ou conteúdos que não precisam no Git
 
-# Django #
+# Ignore a pasta STATIC_ROOT, onde o collectstatic joga os arquivos estáticos gerados (ajuste conforme seu settings.py)
+staticfiles/
+
+# Ignore arquivos de mídia enviados por usuários
+/media/
+/djangoapp/media/
+
+# Não ignore as pastas estáticas dos apps, para que o código fonte fique no Git
+# Remova ou comente estas linhas, pois estão ignorando a pasta static que deve ir para o repo
+#/djangoapp/static/
+#static/
+
+# Ignore settings locais sensíveis
+/djangoapp/project/local_settings.py
+/blog/local_settings.py
+
+# Ignore logs, caches e arquivos temporários do Django e Python
 *.log
 *.pot
 *.pyc
-__pycache__
+__pycache__/
 db.sqlite3
-#static/ # tem que ir para o repositorio
-static/
-media/
-blog/local_settings.py 
 
-
-# Backup files #
+# Backup files
 *.bak
 
-# If you are using PyCharm #
-# User-specific stuff
+# Python environments (venv)
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Docker volumes e dados persistentes (ajuste se usar outros diretórios)
+/data/
+
+# IDEs e editores
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Arquivos específicos de IDEs - PyCharm, IntelliJ, etc
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-
-# AWS User-specific
 .idea/**/aws.xml
-
-# Generated files
 .idea/**/contentModel.xml
-
-# Sensitive or high-churn files
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
@@ -42,26 +59,20 @@ blog/local_settings.py
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
-
-# Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
 
-# File-based blog format
-*.iws
+# Outros arquivos temporários e caches
+*.tmPreferences.cache
+*.tmlanguage.cache
+*.stTheme.cache
+*.bak
+*.swp
+*.tmp
 
-# IntelliJ
-out/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Python #
-*.py[cod]
-*$py.class
-
-# Distribution / packaging
-.Python build/
+# Python packaging and distribution
+.Python
+build/
 develop-eggs/
 dist/
 downloads/
@@ -79,11 +90,7 @@ wheels/
 *.manifest
 *.spec
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
+# Test and coverage reports
 htmlcov/
 .tox/
 .coverage
@@ -95,56 +102,32 @@ coverage.xml
 *.cover
 .hypothesis/
 
-# Jupyter Notebook
+# Jupyter Notebook checkpoints
 .ipynb_checkpoints
 
-# pyenv
-.python-version
-
-# celery
-celerybeat-schedule.*
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+# Misc
 posts/
-anotacao.txt 
+anotacao.txt
+.gitignore copy
 
-# mkdocs documentation
-/site
 
-# mypy
+# MyPy cache
 .mypy_cache/
 
-# Sublime Text #
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
-*.sublime-workspace
-*.sublime-blog
-
-# sftp configuration file
+# Others
 sftp-config.json
-
-# Package control specific files Package
 Control.last-run
 Control.ca-list
 Control.ca-bundle
 Control.system-ca-bundle
 GitHub.sublime-settings
 
-# Visual Studio Code #
+# VSCode specific
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# History (se usa alguma extensão para versionar histórico local)
 .history

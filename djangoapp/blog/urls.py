@@ -14,6 +14,7 @@ urlpatterns = [
      path('category/<slug:slug>/', CategoryListView.as_view(), name='category'),
      path('tag/<slug:slug>/', TagListView.as_view(), name='tag'),
      path('search/', SearchListView.as_view(), name='search'),
+     #path('avaliacao/', avaliacao_view, name='avaliacao'),
      #path('', index, name='index'),
      #path('page/<slug:slug>/', page, name='page'),
      # path('tag/<slug:slug>/', tag, name='tag'),

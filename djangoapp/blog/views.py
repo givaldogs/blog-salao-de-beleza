@@ -208,3 +208,5 @@ class PostDetailView(DetailView):
     def get_queryset(self) -> QuerySet[Any]:
         return super().get_queryset().filter(is_published=True)
     
+
+    

@@ -1,0 +1,27 @@
+<!-- avaliacoes/templates/avaliacoes/feedback.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+</head>
+
+<body>
+    <h1>Como foi sua experiência?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>
+            <input type="radio" name="tipo" value="good" required> 😊 Bom
+        </label><br>
+        <label>
+            <input type="radio" name="tipo" value="neutral"> 😐 Neutro
+        </label><br>
+        <label>
+            <input type="radio" name="tipo" value="bad"> 😞 Ruim
+        </label><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
+</html>

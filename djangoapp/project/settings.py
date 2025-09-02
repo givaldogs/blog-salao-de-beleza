@@ -25,7 +25,8 @@ DATA_DIR = BASE_DIR.parent / 'data' / 'web'
 #load_dotenv(BASE_DIR.parent / 'dotenv_files' / '.env', override=True)
 load_dotenv(BASE_DIR / 'dotenv_files' / '.env', override=True)
 
-# # Teste para garantir que as variáveis estão sendo carregadas
+
+# Teste para garantir que as variáveis estão sendo carregadas
 # print("SECRET_KEY:", os.getenv('SECRET_KEY'))
 # print("DB_ENGINE:", os.getenv('DB_ENGINE'))
 # print("POSTGRES_DB:", os.getenv('POSTGRES_DB'))
@@ -73,6 +74,7 @@ INSTALLED_APPS = [
     # Meu apps
     'blog',
     'site_setup',
+    'avaliacoes', 
 
     # Summernote
     'django_summernote',

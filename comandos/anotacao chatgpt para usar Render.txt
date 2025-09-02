@@ -1,0 +1,59 @@
+1. Dockerfile
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y gcc libpq-dev
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+ENV PORT 8000
+
+EXPOSE 8000
+
+CMD ["gunicorn", "meu_projeto.wsgi:application", "--bind", "0.0.0.0:8000"]
+
+-------------------------------
+2. requirements.txt
+Django>=4.2
+gunicorn
+psycopg2-binary
+dj-database-url
+--------------------------------------------
+3. settings.py (trecho principal do banco e variáveis)
+import os
+import dj_database_url
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = os.getenv('SECRET_KEY', 'troque_essa_chave_por_uma_segura')
+
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+
+ALLOWED_HOSTS = ['*']
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+}
+------------------------------------------------------
+4. Variáveis de ambiente no Render
+No painel do Render, configure essas variáveis para seu Web Service:
+
+DATABASE_URL → URL do banco PostgreSQL gerenciado no Render.
+
+SECRET_KEY → chave secreta Django (pode gerar uma no site https://djecrety.ir/).
+
+DEBUG → False para produção.
+---------------------------------------
+5. Rodar migrations
+Depois que o app estiver no ar, rode:
+render ssh nome-do-servico
+python manage.py migrate
+--------------------------------
+
+
