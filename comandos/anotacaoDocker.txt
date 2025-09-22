@@ -62,3 +62,42 @@ docker-compose run --rm djangoapp /bin/sh -c'echo $SECRET_KEY'
 
 Rodar o servidor com docker exec -it djangoapp python manage.py runserver 0.0.0.0:8000
 =======================================================
+
+Passo 4: Resetar a senha do superusuário
+from django.contrib.auth import get_user_model
+User = get_user_model()
+user = User.objects.get(username='seu_nome_de_usuario')
+user.set_password('novasenha123')
+user.save()
+exit()
+===============================================
+
+1. Verifique o nome do container do Django
+docker ps
+=================================================================================
+Se quiser iniciar tudo de novo depois, é só:
+
+Ir pra pasta do projeto
+
+Rodar:
+docker-compose up --build
+ou
+docker-compose up -d  # se quiser rodar em background
+
+observacao:
+docker-compose down
+Isso encerra e remove todos os containers definidos no docker-compose.yml.
+===============================================================
+✅ O jeito mais fácil de redefinir a senha do superusuário no seu caso é:
+👉 Usar o terminal com este comando:
+docker exec -it <nome_do_container_django> python manage.py changepassword gival
+
+=======================================
+dia 19.09.2025 o Docker nao funcionava:
+Dica para o futuro:
+
+Sempre que for rodar comandos Docker no terminal, 
+certifique-se que o Docker Desktop está aberto e 
+funcionando (ícone na bandeja do Windows com status "Docker is running").
+
+Se der erro, um wsl --shutdown e reiniciar o Docker Desktop costuma ajudar.
