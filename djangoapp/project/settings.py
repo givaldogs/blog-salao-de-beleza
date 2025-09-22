@@ -24,8 +24,9 @@ DATA_DIR = BASE_DIR.parent / 'data' / 'web'
 # DOTENV
 #load_dotenv(BASE_DIR.parent / 'dotenv_files' / '.env', override=True)
 #load_dotenv(BASE_DIR / 'dotenv_files' / '.env', override=True)
-load_dotenv(BASE_DIR.parent.parent / 'dotenv_files' / '.env', override=True)
-
+dotenv_path = BASE_DIR.parent / 'dotenv_files' / '.env'
+print(f"Loading .env from: {dotenv_path}")
+load_dotenv(BASE_DIR.parent / 'dotenv_files' / '.env', override=True)
 
 
 # Teste para garantir que as variáveis estão sendo carregadas
