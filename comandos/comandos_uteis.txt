@@ -21,3 +21,23 @@ gunicorn project.wsgi:application --bind 0.0.0.0:8000 --daemon
 
 grep -i posts project/settings.py
 cat project/settings.py
+
+===================================================
+# Verifique permissões das pastas no caminho até os arquivos estáticos
+ls -ld /home
+ls -ld /home/blogunivesp
+ls -ld /home/blogunivesp/blogapp
+ls -ld /home/blogunivesp/blogapp/data
+ls -ld /home/blogunivesp/blogapp/data/web
+ls -ld /home/blogunivesp/blogapp/data/web/static
+ls -l /home/blogunivesp/blogapp/data/web/static/blog/css
+=================================================================
+Exemplo para dar permissão de execução e leitura para "others" (leitura para pastas precisa de x para permitir entrar na pasta):
+sudo chmod o+rx /home/blogunivesp
+sudo chmod o+rx /home/blogunivesp/blogapp
+sudo chmod o+rx /home/blogunivesp/blogapp/data
+sudo chmod o+rx /home/blogunivesp/blogapp/data/web
+sudo chmod o+rx /home/blogunivesp/blogapp/data/web/static
+sudo chmod o+r /home/blogunivesp/blogapp/data/web/static/blog/css/*.css
+---------------------------------------------------------
+
