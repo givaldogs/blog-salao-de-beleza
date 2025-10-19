@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Avaliações</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .feedback-list {
+            margin-top: 30px;
+        }
+
+        .feedback-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .chart-container {
+            width: 400px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Feedback dos Clientes</h1>
+
+    <div class="stats">
+        <div class="stat-box"><strong>Total:</strong> {{ total }}</div>
+        <div class="stat-box"><strong>Bom:</strong> {{ bom }}</div>
+        <div class="stat-box"><strong>Neutro:</strong> {{ neutro }}</div>
+        <div class="stat-box"><strong>Ruim:</strong> {{ ruim }}</div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="feedbackChart"></canvas>
+    </div>
+
+    <h2>Últimos Feedbacks</h2>
+    <div class="feedback-list">
+        {% for feedback in feedbacks %}
+        <div class="feedback-item">
+            <strong>{{ feedback.get_tipo_display }}</strong> - {{ feedback.data_hora|date:"d/m/Y H:i" }}
+        </div>
+        {% empty %}
+        <p>Nenhum feedback registrado ainda.</p>
+        {% endfor %}
+    </div>
+
+    <script>
+        const ctx = document.getElementById('feedbackChart').getContext('2d');
+        const feedbackChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Bom', 'Neutro', 'Ruim'],
+                datasets: [{
+                    label: 'Avaliações',
+                    data: [{{ bom }}, {{ neutro }}, {{ ruim }}],
+        backgroundColor: [
+            'rgba(75, 192, 192, 0.7)',   // Bom - verde água
+            'rgba(255, 205, 86, 0.7)',   // Neutro - amarelo
+            'rgba(255, 99, 132, 0.7)'    // Ruim - vermelho
+        ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 205, 86, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+                borderWidth: 1
+                }]
+            },
+        options: {
+            responsive: true,
+                plugins: {
+                legend: {
+                    position: 'bottom',
+                    },
+                title: {
+                    display: true,
+                        text: 'Distribuição das Avaliações'
+                }
+            }
+        }
+        });
+    </script>
+</body>
+
+</html>

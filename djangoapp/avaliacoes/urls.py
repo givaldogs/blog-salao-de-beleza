@@ -6,4 +6,5 @@ app_name = 'avaliacoes'  # ← ESSENCIAL para usar {% url 'avaliacoes:feedback_e
 urlpatterns = [
     path('', views.enviar_feedback, name='enviar_feedback'),
     path('enviado/', views.feedback_enviado, name='feedback_enviado'),
+    path('dashboard/', views.feedback_dashboard, name='feedback_dashboard'),
 ]

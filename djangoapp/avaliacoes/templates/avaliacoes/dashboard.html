@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Avaliações</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .chart-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .feedback-list {
+            margin-top: 30px;
+        }
+
+        .feedback-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Feedback dos Clientes</h1>
+
+    <div class="stats">
+        <div class="stat-box"><strong>Total:</strong> {{ total }}</div>
+        <div class="stat-box"><strong>Bom:</strong> {{ bom }}</div>
+        <div class="stat-box"><strong>Neutro:</strong> {{ neutro }}</div>
+        <div class="stat-box"><strong>Ruim:</strong> {{ ruim }}</div>
+    </div>
+
+    <!-- Gráfico de Pizza -->
+    <div class="chart-container">
+        <canvas id="feedbackChart"></canvas>
+    </div>
+
+    <!-- Gráfico de Barras -->
+    <div class="chart-container">
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <!-- Lista dos últimos feedbacks -->
+    <h2>Últimos Feedbacks</h2>
+    <div class="feedback-list">
+        {% for feedback in feedbacks %}
+        <div class="feedback-item">
+            <strong>{{ feedback.get_tipo_display }}</strong> - {{ feedback.data_hora|date:"d/m/Y H:i" }}
+        </div>
+        {% empty %}
+        <p>Nenhum feedback registrado ainda.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Scripts dos Gráficos -->
+    <script>
+        // Gráfico de Pizza
+        const ctx1 = document.getElementById('feedbackChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Bom', 'Neutro', 'Ruim'],
+                datasets: [{
+                    label: 'Avaliações',
+                    data: [{{ bom }}, {{ neutro }}, {{ ruim }}],
+            backgroundColor: [
+            'rgba(75, 192, 192, 0.7)',   // Bom
+            'rgba(255, 205, 86, 0.7)',   // Neutro
+            'rgba(255, 99, 132, 0.7)'    // Ruim
+        ],
+            borderColor: [
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 205, 86, 1)',
+            'rgba(255, 99, 132, 1)'
+        ],
+            borderWidth: 1
+                }]
+            },
+            options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' },
+                title: {
+                    display: true,
+                    text: 'Distribuição Geral das Avaliações'
+                }
+            }
+        }
+        });
+
+        // Gráfico de Barras
+        const ctx2 = document.getElementById('barChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: {{ dias| safe }},
+            datasets: [
+            {
+                label: 'Bom',
+                data: {{ bom_por_dia| safe }},
+            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+                    },
+            {
+                label: 'Neutro',
+                data: {{ neutro_por_dia| safe }},
+            backgroundColor: 'rgba(255, 205, 86, 0.7)',
+            borderColor: 'rgba(255, 205, 86, 1)',
+            borderWidth: 1
+                    },
+            {
+                label: 'Ruim',
+                data: {{ ruim_por_dia| safe }},
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+                    }
+        ]
+            },
+            options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Feedbacks por Dia (Últimos 7 dias)'
+                },
+                legend: { position: 'top' }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1 }
+                }
+            }
+        }
+        });
+    </script>
+</body>
+
+</html>
